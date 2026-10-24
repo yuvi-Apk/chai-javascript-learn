@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Chai aur Javascript</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <div id="keyDetails"></div>
+  </body>
+  <script>
+    const sayDate = function (str) {
+      console.log(str, Date.now());
+    };
+
+    let intervalId;
+
+    const startInterval = document.getElementById("start");
+    const stopInterval = document.getElementById("stop");
+
+    startInterval.addEventListener(
+      "click",
+      function () {
+        if (!intervalId) {
+          intervalId = setInterval(sayDate, 1000, "hi");
+        }
+      },
+      false,
+    );
+
+    stopInterval.addEventListener(
+      "click",
+      function () {
+        clearInterval(intervalId);
+        intervalId = null;
+      },
+      false,
+    );
+
+    window.addEventListener("keydown", (e) => {
+      const keyDetails = document.getElementById("keyDetails");
+
+      keyDetails.innerHTML = `
+        <table>
+            <tr>
+                <th>Key</th>
+                <th>key code</th>
+                <th>code</th>
+            </tr>
+            <tr>
+                <td>${e.key === " " ? "Space" :e.key}</td>
+                <td>${e.keyCode}</td>
+                <td>${e.code}</td>
+            </tr>
+</table>
+`;
+    });
+  </script>
+</html>
